@@ -9,8 +9,6 @@ namespace Graphs
         public int val;
         public Node next;
 
-        public bool visited;
-
         public Node(int value){
             val = value;
         }
@@ -19,27 +17,60 @@ namespace Graphs
     public class Graph
     {
         private int vertexCount;
-        private List<Node> adjacencyList;
+        private List<List<int>> adjacencyList;
 
         public Graph(int vertexCount){
             this.vertexCount = vertexCount;
-            adjacencyList = new List<Node>();
+            adjacencyList = new List<List<int>>();
             for(int i =0;i< vertexCount;i++){
-                adjacencyList[i] = new Node(i);
+                var adjacencyChildList = new List<int>();
+                adjacencyList.Add(adjacencyChildList);
             }
         }
 
         public void AddEdge(int source, int destination){
-            InsertNode(source,destination);
+            adjacencyList[source].Add(destination);
         }
 
-        public void InsertNode(int source,int destination){
-            Node parent = adjacencyList[source];
-            Node child = new Node(destination);
-            var temp = parent.next; 
-            parent.next = child;
-            child.next = temp;
-        } 
+        public List<int> GetChildren(int vertex){
+            return adjacencyList[vertex];
+        }
+
+        public bool IsCyclicUtil(int vertex, bool[] visited, bool[] recStack){
+            if(recStack[vertex]){
+                return true;
+            }
+
+            if(visited[vertex]){
+                return false;
+            }
+
+            recStack[vertex] = true;
+            visited[vertex] = true;
+
+            foreach(var child in GetChildren(vertex)){
+                if(IsCyclicUtil(child, visited, recStack)){
+                    return true;
+                }
+            }
+
+            recStack[vertex] = false;
+
+            return false;
+        }
+
+        public bool IsCyclic(){
+            bool[] v = new bool[vertexCount];
+            bool[] rs = new bool[vertexCount];
+            for(int i=0;i<vertexCount;i++){
+                if(IsCyclicUtil(i,v,rs)){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 
     public class  Solution
@@ -49,16 +80,12 @@ namespace Graphs
             Stack<Node> s = new Stack<Node>(); 
             Graph g = new Graph(numOfCourses);
 
-            for(int i=0; i < preReqs.GetLength(0); i++){
-                g.AddEdge(preReqs[i,0], preReqs[i,0]);
+            for(int i = 0; i < preReqs.GetLength(0); i++){     
+                g.AddEdge(preReqs[i,0], preReqs[i,1]);
             } 
-
-            return false;
-        } 
-
-        public Node GetNextUnvisitedChild(HashSet<int> v, int source){
-            return new Node(1);
-        }
+ 
+            return !g.IsCyclic();
+        }  
     }
 
 }

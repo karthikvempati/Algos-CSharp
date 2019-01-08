@@ -4,7 +4,7 @@ using System.Collections.Generic;
       public IList<UndirectedGraphNode> neighbors;
       public UndirectedGraphNode(int x) { label = x; neighbors = new List<UndirectedGraphNode>(); }
   }
-public class Solution {
+public class Solution1 {
     public UndirectedGraphNode CloneGraph(UndirectedGraphNode node) {
         var copy = new UndirectedGraphNode(node.label);
         Dictionary<int,UndirectedGraphNode> clonedNodes = new Dictionary<int, UndirectedGraphNode>();
