@@ -43,6 +43,56 @@ namespace algoscsharp
  
         static void Main(string[] args)
         {  
+            var board = new char[,]{
+                {'A','B','C','E'}, {'S','F','C','S'}, {'A','D','E','E'}
+            };
+
+            MockInterviews.WordSearch2DArray ws = new MockInterviews.WordSearch2DArray();
+            string[] s = new string[]{"ABCCED","SEE","ABCB","ABC","ADF","SCF"};
+            bool[] results = new bool[]{true,true,false,true,true,true};
+            
+            for (int i = 0; i < s.Length; i++)
+            { 
+                Console.WriteLine(ws.Exist(board, s[i]) + "," + results[i]);  
+            } 
+              
+            #region OldCode
+            /*
+            Arrays.NeedleInHayStack n = new Arrays.NeedleInHayStack(); 
+            string[] hayStacks = new string[]{"mississippi","hello","aaaaa","aa","ababbaab", "a",""};
+            string[] needles = new string[]{"issip","ll","a","bba","baab","aaaa",""};
+            int[] results = new int[]{4,2,0,-1,4,-1,0};
+
+            for (int i = 0; i < hayStacks.Length; i++)
+            {
+                Console.WriteLine(n.StrStr(hayStacks[i], needles[i])==results[i]);    
+            }
+            
+            
+            Contest119.KClosestSum kc = new Contest119.KClosestSum();
+            int[][] a = new int[2][];
+            a[0] = new int[]{1,3};
+            a[1] = new int[]{-2,2};
+            kc.KClosest(a, 1);
+            
+            dp.PaintHouse ph = new dp.PaintHouse();
+            int[,] costs = new int[,]{{17,2,17},{16,16,5},{ 14,3,19}};
+            Console.WriteLine(ph.Paint(costs));
+
+            
+            dp.HouseRobber hr = new dp.HouseRobber();
+            int[] houses = new int[]{2,7,9,3,1};
+            Console.WriteLine(hr.Rob(houses));
+
+            
+            var nums = new int[]{-2,1,-3,4,4,2,1,-5,4 };
+            dp.MaxSubArrayClass m = new dp.MaxSubArrayClass();
+            Console.WriteLine(m.MaxSubArray(nums));
+           
+            ZigZagString z = new ZigZagString();
+            var a = z.Convert("PAYPALISHIRING",4);
+            //PrintZigZag(a);
+           
             string[] strArray = new string[]{"","a","aa","ababbaab",
             "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
             ,"ibvjkmpyzsifuxcabqqpahjdeuzaybqsrsmbfplxycsafogotliyvhxjtkrbzqxlyfwujzhkdafhebvsdhkkdbhlhmaoxmbkqiwiusngkbdhlvxdyvnjrzvxmukvdfobzlmvnbnilnsyrgoygfdzjlymhprcpxsnxpcafctikxxybcusgjwmfklkffehbvlhvxfiddznwumxosomfbgxoruoqrhezgsgidgcfzbtdftjxeahriirqgxbhicoxavquhbkaomrroghdnfkknyigsluqebaqrtcwgmlnvmxoagisdmsokeznjsnwpxygjjptvyjjkbmkxvlivinmpnpxgmmorkasebngirckqcawgevljplkkgextudqaodwqmfljljhrujoerycoojwwgtklypicgkyaboqjfivbeqdlonxeidgxsyzugkntoevwfuxovazcyayvwbcqswzhytlmtmrtwpikgacnpkbwgfmpavzyjoxughwhvlsxsgttbcyrlkaarngeoaldsdtjncivhcfsaohmdhgbwkuemcembmlwbwquxfaiukoqvzmgoeppieztdacvwngbkcxknbytvztodbfnjhbtwpjlzuajnlzfmmujhcggpdcwdquutdiubgcvnxvgspmfumeqrofewynizvynavjzkbpkuxxvkjujectdyfwygnfsukvzflcuxxzvxzravzznpxttduajhbsyiywpqunnarabcroljwcbdydagachbobkcvudkoddldaucwruobfylfhyvjuynjrosxczgjwudpxaqwnboxgxybnngxxhibesiaxkicinikzzmonftqkcudlzfzutplbycejmkpxcygsafzkgudy",
@@ -55,8 +105,7 @@ namespace algoscsharp
                 var res = s.LongestPalindrome(strArray[i]);
                 Console.WriteLine(res + "," + result[i]);
             }
-            #region OldCode
-            /*
+            
 
             Contest118.PowerFullNums pn = new Contest118.PowerFullNums();
             PrintList(pn.PowerfulIntegers(1,3,12));
@@ -135,7 +184,18 @@ namespace algoscsharp
             #endregion
         }
 
-        static void PrintCache(LRUCache cache){
+        static void PrintZigZag(char[,] a){
+            for (int i = 0, j=0; i < a.GetLength(0) && j < a.GetLength(1);j++){
+                Console.Write(a[i,j] + " ");                
+                if(j == a.GetLength(1)-1){
+                    Console.WriteLine();
+                    i++;
+                    j = -1;
+                }
+            }
+        }
+
+    static void PrintCache(LRUCache cache){
             foreach(var item in cache.dict){
                 Console.WriteLine(item.Value.data);
             }

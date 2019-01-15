@@ -21,7 +21,8 @@ public static class Extensions
 }
 
 public class Solution {
-    public string LongestPalindrome(string s) {
+    
+    public string LongestPalindrome1(string s) {
         if(s.Length == 1)
             return s;
         if(s.Length == 2 && s[0] != s[1]){
