@@ -4,25 +4,31 @@ using Graphs;
 using LinkedLists;
 using System.Collections.Generic;
 using System.Linq;
+using lcmedium;
 
 namespace algoscsharp
-{ 
+{
     class Program
     {
 
-        public static string LongestPalindrome(string s) {
-            if(s.Length < 2)
-            return s;
+        public static string LongestPalindrome(string s)
+        {
+            if (s.Length < 2)
+                return s;
             string result = "";
 
-            for(int i=0;i < s.Length-1-result.Length;i++){
-                for(int j=i+1;j <= s.Length;j++){
-                    int len = j-i;
-                    if(len < result.Length)
+            for (int i = 0; i < s.Length - 1 - result.Length; i++)
+            {
+                for (int j = i + 1; j <= s.Length; j++)
+                {
+                    int len = j - i;
+                    if (len < result.Length)
                         continue;
                     var cs = s.Substring(i, len);
-                    if(IsPalindrome(cs)){
-                        if(len > result.Length){
+                    if (IsPalindrome(cs))
+                    {
+                        if (len > result.Length)
+                        {
                             result = cs;
                         }
                     }
@@ -31,33 +37,151 @@ namespace algoscsharp
 
             return result;
         }
-    
-        public static bool IsPalindrome(string s){
-            for(int i=0,j=s.Length-1;i<=j;i++,j--){
-                if(s[i] != s[j])
+
+        public static bool IsPalindrome(string s)
+        {
+            for (int i = 0, j = s.Length - 1; i <= j; i++, j--)
+            {
+                if (s[i] != s[j])
                     return false;
             }
-            
+
             return true;
         }
- 
+
         static void Main(string[] args)
-        {  
+        {
+            Contest123.BrokenCalculator b = new Contest123.BrokenCalculator();
+            int[] x = new int[] {2,5,3,1024,1};
+            int[] y = new int[] {3,8,10,1,1000000000};
+            for (int i = 0; i < x.Length; i++){
+                Console.WriteLine(b.BrokenCalc(x[i],y[i]));
+            } 
+            #region commentBTLex
+            /*
+            Contest122.IntervalListIntersection I = new Contest122.IntervalListIntersection();
+            int[][] a = new int[][]{new int[]{0,2}, new int[]{5,10},new int[]{13,23},new int[]{24,25}};
+            int[][] b = new int[][]{new int[]{1,5}, new int[]{8,12},new int[]{15,24},new int[]{25,26}};
+            Contest122.Interval[] A = new Contest122.Interval[4];
+            Contest122.Interval[] B = new Contest122.Interval[4];
+            for (int i = 0; i < a.Length; i++)
+            {
+                A[i] = new Contest122.Interval(a[i][0], a[i][1]);
+                B[i] = new Contest122.Interval(b[i][0], b[i][1]);                
+            }
+            I.IntervalIntersection(A,B);
+            
+                 if(root == null){
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        string result = string.Empty;
+        string c = string.Empty;
+        Stack<TreeNode> s = new Stack<TreeNode>();
+        s.Push(root);
+        while(s.Count > 0){
+            var node = s.Pop();
+            sb.Append((char) (node.val + 97))
+            
+            if(node.left == null && node.right == null){  
+                c = sb.ToString();
+                result = CompareString(result, c.Reverse());
+                sb.Remove(c.Length - 1, 1);
+            }
+            
+            if(node.right != null)
+                s.Push(node.right);
+            
+            if(node.left != null)
+                s.Push(node.left);
+        }
+        
+        return result;
+            */
+            #endregion
+            #region OldCode
+            /*
+            Contest122.SumOfEvenNumbers s = new Contest122.SumOfEvenNumbers();
+            s.SumEvenAfterQueries(new int[]{0,0,0,0},new int[][]{new int[]{1,0}, new int[]{-3,1} ,new int[]{-4,0} ,new int[]{2,3}});
+            
+            lcmedium.IntegerReplacementCount ic = new IntegerReplacementCount();
+            ic.IntegerReplacement(int.MaxValue);
+            
+            //lcmedium.ThreeSumSolution t = new lcmedium.ThreeSumSolution();
+            //int[] nums = new int[] {-1, 0, 1, 2, -1, -4};
+
+            //var result = t.ThreeSum(nums);
+            Trie trie = new Trie();
+            trie.AddWord("hello"); 
+            trie.AddWord("tokyo");
+            Console.WriteLine(trie.SearchWord("hell"));
+            Console.WriteLine(trie.SearchWord("h.ll."));
+            Console.WriteLine(trie.SearchWord("hell.."));
+            Console.WriteLine(trie.SearchWord("h.llo"));
+           
+            lcmedium.zigzagconversion z = new lcmedium.zigzagconversion();
+            
+            string[] s = new string[]{"PAYPALISHIRING"};
+            int[] rows = new int[]{1};
+            string[] r = new string[]{"PAHNAPLSIIGYIR"};
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                Console.WriteLine(z.Convert(s[i],rows[i]) + " , " + r[i]);
+            }
+
+            
+            TripleByte.TicTacToe ttt = new TripleByte.TicTacToe();
+            ttt.AddToken(0,1,'X');
+            ttt.MakeAMoveAI();
+            ttt.PrintBoard();
+
+
+            
+            lcmedium.ReverseString reverseString = new lcmedium.ReverseString();
+
+            string s = reverseString.ReverseWords("   a   b ");
+
+            Console.WriteLine(s);
+
+            int[] nums = new int[]{91,34,56,76,78};
+            bool[] results = new bool[]{true,false,false,false,false,true};
+
+            for (int i=0; i< nums.Length;i++){
+
+                lceasy.HappyNumber h = new lceasy.HappyNumber();
+                Console.WriteLine(h.IsHappy(nums[i]) + "," + results[i]);
+            }
+
+
+
+            int[] dividends = new int[]{7, -7, -7, 7,1,-2147483648, 2147483647, -2147483648, -2147483648};
+            int[] divisors = new int[]{2, -2,  2, -2,1, 1, 1, -1, -2147483648};
+            int[] results = new int[]{3,3,-3,-3,1,-2147483648,2147483647,2147483647, 1 };
+
+            for (int i=0; i< dividends.Length;i++){
+
+                int dividend = dividends[i];
+                int divisor = divisors[i];
+
+                lcmedium.DivideNoMulti d = new lcmedium.DivideNoMulti();
+                Console.WriteLine(d.Divide(dividend, divisor) + "," + results[i]);
+            }
+          
             var board = new char[,]{
-                {'A','B','C','E'}, {'S','F','C','S'}, {'A','D','E','E'}
+                {'C','A','A'}, {'A','A','A'}, {'B','C','D'}
             };
 
             MockInterviews.WordSearch2DArray ws = new MockInterviews.WordSearch2DArray();
-            string[] s = new string[]{"ABCCED","SEE","ABCB","ABC","ADF","SCF"};
-            bool[] results = new bool[]{true,true,false,true,true,true};
+            string[] s = new string[]{"AAB","ABCCED","SEE","ABCB","ABC","ADF","SCF"};
+            bool[] results = new bool[]{true, true,true,false,true,true,true};
             
             for (int i = 0; i < s.Length; i++)
             { 
                 Console.WriteLine(ws.Exist(board, s[i]) + "," + results[i]);  
             } 
               
-            #region OldCode
-            /*
+            
             Arrays.NeedleInHayStack n = new Arrays.NeedleInHayStack(); 
             string[] hayStacks = new string[]{"mississippi","hello","aaaaa","aa","ababbaab", "a",""};
             string[] needles = new string[]{"issip","ll","a","bba","baab","aaaa",""};
@@ -145,8 +269,8 @@ namespace algoscsharp
             //PrintRandomListNode(node);
             var sol = new LinkedListsSolution();
             //PrintTwoRandomListNode(node,sol.CopyRandomList(node));
-            PrintTwoRandomListNode(node,sol.CopyRandomList(node)); */                       
-            
+            PrintTwoRandomListNode(node,sol.CopyRandomList(node)); */
+
             /* Solution s = new Solution();
             int[,] i = new int[,]{{1,0}};
             s.CourseSchedule(2, i);
@@ -164,7 +288,7 @@ namespace algoscsharp
             }
             */
             //LRUCacheNS.LRUCache cache = new LRUCacheNS.LRUCache( 1 /* capacity */ );
-            
+
             //cache.Put(2, 1);
             //PrintList(cache);
             //cache.Put(2, 2);
@@ -184,10 +308,13 @@ namespace algoscsharp
             #endregion
         }
 
-        static void PrintZigZag(char[,] a){
-            for (int i = 0, j=0; i < a.GetLength(0) && j < a.GetLength(1);j++){
-                Console.Write(a[i,j] + " ");                
-                if(j == a.GetLength(1)-1){
+        static void PrintZigZag(char[,] a)
+        {
+            for (int i = 0, j = 0; i < a.GetLength(0) && j < a.GetLength(1); j++)
+            {
+                Console.Write(a[i, j] + " ");
+                if (j == a.GetLength(1) - 1)
+                {
                     Console.WriteLine();
                     i++;
                     j = -1;
@@ -195,35 +322,45 @@ namespace algoscsharp
             }
         }
 
-    static void PrintCache(LRUCache cache){
-            foreach(var item in cache.dict){
+        static void PrintCache(LRUCache cache)
+        {
+            foreach (var item in cache.dict)
+            {
                 Console.WriteLine(item.Value.data);
             }
         }
 
-        static void PrintRandomListNode(RandomListNode head){
-            while(head != null){
+        static void PrintRandomListNode(RandomListNode head)
+        {
+            while (head != null)
+            {
                 Console.WriteLine("head value --> " + head.label);
-                if(head.next != null){
+                if (head.next != null)
+                {
                     Console.WriteLine("--> next value --> " + head.next.label);
                 }
-                if(head.random != null){
+                if (head.random != null)
+                {
                     Console.WriteLine("--> random value -->" + head.random.label);
                 }
                 head = head.next;
             }
         }
 
-        
-        static void PrintTwoRandomListNode(RandomListNode head1, RandomListNode head2){
-            while(head1 != null && head2 != null){
+
+        static void PrintTwoRandomListNode(RandomListNode head1, RandomListNode head2)
+        {
+            while (head1 != null && head2 != null)
+            {
                 Console.WriteLine("head value --> " + head1.label);
-                Console.WriteLine("head value --> " + head2.label);                
-                if(head1.next != null && head2.next != null){
+                Console.WriteLine("head value --> " + head2.label);
+                if (head1.next != null && head2.next != null)
+                {
                     Console.WriteLine("--> next value --> " + head1.next.label);
-                    Console.WriteLine("--> next value --> " + head2.next.label);                    
+                    Console.WriteLine("--> next value --> " + head2.next.label);
                 }
-                if(head1.random != null && head2.random != null){
+                if (head1.random != null && head2.random != null)
+                {
                     Console.WriteLine("--> random value -->" + head1.random.label);
                     Console.WriteLine("--> random value -->" + head2.random.label);
                 }
@@ -232,23 +369,26 @@ namespace algoscsharp
             }
         }
 
-        static RandomListNode CreateLinkedList(int length){
+        static RandomListNode CreateLinkedList(int length)
+        {
             int len = length;
             var head = new RandomListNode(0);
-            var temp = head; 
+            var temp = head;
             List<RandomListNode> list = new List<RandomListNode>();
             list.Add(temp);
-            for(int i=1;i<=len;i++){
+            for (int i = 1; i <= len; i++)
+            {
                 temp.next = new RandomListNode(i);
                 list.Add(temp.next);
                 temp = temp.next;
-            } 
+            }
 
             temp = head;
 
-            while(temp != null){
+            while (temp != null)
+            {
                 Random r = new Random();
-                int i = r.Next(0,len);
+                int i = r.Next(0, len);
                 temp.random = list[i];
                 temp = temp.next;
             }
@@ -256,15 +396,18 @@ namespace algoscsharp
             return head;
         }
 
-        static void PrintLinkedList(LRUCache cache){
+        static void PrintLinkedList(LRUCache cache)
+        {
             DLL head = cache.head;
             DLL tail = null;
-            while(head != null){
-                Console.Write(head.data + ","); 
+            while (head != null)
+            {
+                Console.Write(head.data + ",");
                 head = head.next;
             }
 
-            while(tail != null){
+            while (tail != null)
+            {
                 Console.Write(tail.data + ",");
                 tail = tail.prev;
             }
@@ -272,7 +415,8 @@ namespace algoscsharp
             Console.WriteLine();
         }
 
-        static void PrintList(IList<int> list){
+        static void PrintList(IList<int> list)
+        {
             foreach (var item in list)
             {
                 Console.WriteLine(item + ',');
