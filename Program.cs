@@ -5,6 +5,7 @@ using LinkedLists;
 using System.Collections.Generic;
 using System.Linq;
 using lcmedium;
+using lceasy;
 
 namespace algoscsharp
 {
@@ -50,13 +51,24 @@ namespace algoscsharp
         }
 
         static void Main(string[] args)
-        {
-            Contest123.BrokenCalculator b = new Contest123.BrokenCalculator();
-            int[] x = new int[] {2,5,3,1024,1};
-            int[] y = new int[] {3,8,10,1,1000000000};
-            for (int i = 0; i < x.Length; i++){
-                Console.WriteLine(b.BrokenCalc(x[i],y[i]));
-            } 
+        { 
+            SortArrayParity sortArrayParity = new SortArrayParity();
+            int[][] A = new int[][]{new int[]{3,1,2,4},new int[]{2}, new int[]{}, new int[]{3,1}};
+
+            foreach(var a in A){
+                PrintArray(sortArrayParity.SortArrayByParity(a));
+            }  
+        }
+
+        static void PrintArray(int[] A){
+            for (int i = 0; i < A.Length; i++)
+            {
+                Console.Write(A[i] + ",");
+            }
+            Console.WriteLine();
+        }
+
+        static void OldCode(){
             #region commentBTLex
             /*
             Contest122.IntervalListIntersection I = new Contest122.IntervalListIntersection();
@@ -101,6 +113,12 @@ namespace algoscsharp
             #endregion
             #region OldCode
             /*
+            Contest123.BrokenCalculator b = new Contest123.BrokenCalculator();
+            int[] x = new int[] {2,5,3,1024,1};
+            int[] y = new int[] {3,8,10,1,1000000000};
+            for (int i = 0; i < x.Length; i++){
+                Console.WriteLine(b.BrokenCalc(x[i],y[i]));
+            }  
             Contest122.SumOfEvenNumbers s = new Contest122.SumOfEvenNumbers();
             s.SumEvenAfterQueries(new int[]{0,0,0,0},new int[][]{new int[]{1,0}, new int[]{-3,1} ,new int[]{-4,0} ,new int[]{2,3}});
             
