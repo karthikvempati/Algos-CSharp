@@ -15,8 +15,8 @@ namespace MockInterviews
              bool[,] v = new bool[board.GetLength(0), board.GetLength(1)];
              
              for(int i=0;i<board.GetLength(0);i++){
-                 for(int j=0;j < board.GetLength(1);j++){
-                     if(DfsUtil(board, word, i,j,0,new bool[board.GetLength(0), board.GetLength(1)])) return true;
+                 for(int j=0;j < board.GetLength(1);j++){ 
+                     if(DfsUtil(board, word, i,j,0,v)) return true; 
                  }
              }
              
@@ -32,12 +32,11 @@ namespace MockInterviews
 
             if (word[index] == board[i, j])
             {
-                if (index == word.Length - 1) return true;
+                if (index == word.Length - 1) return true; 
 
                 index++;
                   
-                v[i, j] = true;
-
+                v[i, j] = true; 
                 if (i < board.GetLength(0) - 1 && !v[i + 1, j] && DfsUtil(board, word, i + 1, j, index, v)) return true;
                 if (j < board.GetLength(1) - 1 && !v[i, j + 1] && DfsUtil(board, word, i, j + 1, index, v)) return true;
                 if (i > 0 && !v[i - 1, j] && DfsUtil(board, word, i - 1, j, index, v)) return true;
@@ -46,5 +45,6 @@ namespace MockInterviews
 
              return false;
          }
+
     }
 }
